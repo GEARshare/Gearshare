@@ -6,53 +6,32 @@ import classNames from 'classnames';
 import { NamedLink } from '../../components';
 
 import css from './SectionHowItWorks.module.css';
-
+import background from './images/howitworkImage.jpg'
 const SectionHowItWorks = props => {
   const { rootClassName, className } = props;
 
   const classes = classNames(rootClassName || css.root, className);
   return (
-    <div className={classes}>
-      <div className={css.title}>
-        <FormattedMessage id="SectionHowItWorks.titleLineOne" />
-        <br />
-        <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
-      </div>
-
-      <div className={css.steps}>
-        <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part1Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part1Text" />
-          </p>
-        </div>
-
-        <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part2Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part2Text" />
-          </p>
-        </div>
-
-        <div className={css.step}>
-          <h2 className={css.stepTitle}>
-            <FormattedMessage id="SectionHowItWorks.part3Title" />
-          </h2>
-          <p>
-            <FormattedMessage id="SectionHowItWorks.part3Text" />
-          </p>
-        </div>
-      </div>
-
-      <div className={css.createListingLink}>
-        <NamedLink name="NewListingPage">
+    <div className={classes}>    
+      <article className={css.article}>
+        <img className={css.picture} src={background}/>
+        <div className={css.header}>
+          <div className={css.title}>
+            <FormattedMessage id="SectionHowItWorks.titleLineOne" />
+            <br />
+            <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
+          </div>
+                  <NamedLink
+          name="AboutPage"
+          className={css.button}
+        >
           <FormattedMessage id="SectionHowItWorks.createListingLink" />
         </NamedLink>
-      </div>
+        </div>
+
+        
+      </article>
+      
     </div>
   );
 };

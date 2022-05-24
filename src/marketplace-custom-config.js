@@ -87,8 +87,9 @@ export const filters = [
       options: [
         { key: 'camera', label: 'Cameras' },
         { key: 'lense', label: 'Lenses' },
-        { key: 'gripkit', label: 'Grip kits' },
-        { key: 'electric', label: 'Electrics' },
+        { key: 'audio', label: 'Audio' },
+        { key: 'lighting', label: 'Lighting' },
+        { key: 'studio', label: 'Studio' },
       ],
     },
   },
