@@ -32,6 +32,11 @@ const StripePayoutPage = loadable(() => import(/* webpackChunkName: "StripePayou
 const TermsOfServicePage = loadable(() => import(/* webpackChunkName: "TermsOfServicePage" */ './containers/TermsOfServicePage/TermsOfServicePage'));
 const TransactionPage = loadable(() => import(/* webpackChunkName: "TransactionPage" */ './containers/TransactionPage/TransactionPage'));
 
+const CreatorPage=loadable(() =>
+import(
+  /* webpackChunkName: "CreatorPage" */ './containers/CreatorPage/CreatorPage'
+)
+);
 // Styleguide helps you to review current components and develop new ones
 const StyleguidePage = loadable(() => import(/* webpackChunkName: "StyleguidePage" */ './containers/StyleguidePage/StyleguidePage'));
 
@@ -144,6 +149,12 @@ const routeConfiguration = () => {
       name: 'ProfilePage',
       component: ProfilePage,
       loadData: pageDataLoadingAPI.ProfilePage.loadData,
+    },
+    {
+      path: '/c/:id',
+      name: 'CreatorPage',
+      component: CreatorPage,
+      loadData: pageDataLoadingAPI.CreatorPage.loadData,
     },
     {
       path: '/profile-settings',

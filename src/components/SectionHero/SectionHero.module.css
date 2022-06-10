@@ -90,7 +90,7 @@
   composes: animation;
 
   animation-delay: 0.8s;
-
+  float: right;
   @media (--viewportMedium) {
     display: block;
     width: 260px;
