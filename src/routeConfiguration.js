@@ -151,9 +151,10 @@ const routeConfiguration = () => {
       loadData: pageDataLoadingAPI.ProfilePage.loadData,
     },
     {
-      path: '/c',
+      path: '/c/:id',
       name: 'CreatorPage',
       component: CreatorPage,
+      loadData: pageDataLoadingAPI.CreatorPage.loadData,
     },
     {
       path: '/profile-settings',

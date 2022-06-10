@@ -4,6 +4,7 @@ import { currentUserShowSuccess } from '../../ducks/user.duck';
 
 // ================ Action types ================ //
 
+
 export const CLEAR_UPDATED_FORM = 'app/ProfileSettingsPage/CLEAR_UPDATED_FORM';
 
 export const UPLOAD_IMAGE_REQUEST = 'app/ProfileSettingsPage/UPLOAD_IMAGE_REQUEST';
@@ -14,6 +15,8 @@ export const UPDATE_PROFILE_REQUEST = 'app/ProfileSettingsPage/UPDATE_PROFILE_RE
 export const UPDATE_PROFILE_SUCCESS = 'app/ProfileSettingsPage/UPDATE_PROFILE_SUCCESS';
 export const UPDATE_PROFILE_ERROR = 'app/ProfileSettingsPage/UPDATE_PROFILE_ERROR';
 
+export const UPLOAD_CREATOR_IMAGE_REQUEST = 'app/ProfileSettingsPage/UPLOAD_CREATOR_IMAGE_REQUEST';
+export const UPLOAD_CREATOR_IMAGE_SUCCESS = 'app/ProfileSettingsPage/UPLOAD_CREATOR_IMAGE_SUCCESS';
 // ================ Reducer ================ //
 
 const initialState = {
@@ -22,6 +25,7 @@ const initialState = {
   uploadInProgress: false,
   updateInProgress: false,
   updateProfileError: null,
+  uploadCreatorImage:null,
 };
 
 export default function reducer(state = initialState, action = {}) {
