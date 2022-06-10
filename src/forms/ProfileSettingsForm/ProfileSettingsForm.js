@@ -51,6 +51,7 @@ class ProfileSettingsFormComponent extends Component {
             handleSubmit,
             intl,
             invalid,
+            creatorImage,
             onImageUpload,
             pristine,
             profileImage,
@@ -107,7 +108,8 @@ class ProfileSettingsFormComponent extends Component {
           const hasUploadError = !!uploadImageError && !uploadInProgress;
           const errorClasses = classNames({ [css.avatarUploadError]: hasUploadError });
           const transientUserProfileImage = profileImage.uploadedImage || user.profileImage;
-          const transientUser = { ...user, profileImage: transientUserProfileImage };
+          const transientUserCreatorImage = creatorImage.uploadedImage || user.creatorImage;
+          const transientUser = { ...user, profileImage: transientUserProfileImage,creatorImage:transientUserCreatorImage };
 
           // Ensure that file exists if imageFromFile is used
           const fileExists = !!profileImage.file;
@@ -126,6 +128,21 @@ class ProfileSettingsFormComponent extends Component {
               </ImageFromFile>
             ) : null;
 
+            const creatorFileExists = !!creatorImage.file;
+            const creatorFileUploadInProgress = uploadInProgress && creatorFileExists;
+            const creatorDelayAfterUpload = creatorImage.imageId && this.state.uploadDelay;
+            const creatorImageFromFile =
+            creatorFileExists && (creatorFileUploadInProgress || creatorDelayAfterUpload) ? (
+                <ImageFromFile
+                  id={creatorImage.id}
+                  className={errorClasses}
+                  rootClassName={css.uploadingImage}
+                  aspectRatioClassName={css.squareAspectRatio}
+                  file={creatorImage.file}
+                >
+                  {uploadingOverlay}
+                </ImageFromFile>
+              ) : null;
           // Avatar is rendered in hidden during the upload delay
           // Upload delay smoothes image change process:
           // responsive img has time to load srcset stuff before it is shown to user.
@@ -141,7 +158,15 @@ class ProfileSettingsFormComponent extends Component {
                 disableProfileLink
               />
             ) : null;
-
+            const creatorComponent =
+            !creatorFileUploadInProgress && creatorImage.imageId ? (
+              <Avatar
+                className={avatarClasses}
+                renderSizes="(max-width: 767px) 96px, 240px"
+                user={transientUser}
+                disableProfileLink
+              />
+            ) : null;
           const chooseAvatarLabel =
             profileImage.imageId || fileUploadInProgress ? (
               <div className={css.avatarContainer}>
@@ -161,7 +186,25 @@ class ProfileSettingsFormComponent extends Component {
                 </div>
               </div>
             );
-
+            const chooseCreatorLabel =
+            creatorImage.imageId || fileUploadInProgress ? (
+              <div className={css.avatarContainer}>
+                {creatorImageFromFile}
+                {creatorComponent}
+                <div className={css.changeAvatar}>
+                  <FormattedMessage id="ProfileSettingsForm.changeAvatar" />
+                </div>
+              </div>
+            ) : (
+              <div className={css.avatarPlaceholder}>
+                <div className={css.avatarPlaceholderText}>
+                  <FormattedMessage id="ProfileSettingsForm.addYourProfilePicture" />
+                </div>
+                <div className={css.avatarPlaceholderTextMobile}>
+                  <FormattedMessage id="ProfileSettingsForm.addYourProfilePictureMobile" />
+                </div>
+              </div>
+            );
           const submitError = updateProfileError ? (
             <div className={css.error}>
               <FormattedMessage id="ProfileSettingsForm.updateProfileFailed" />
@@ -241,7 +284,9 @@ class ProfileSettingsFormComponent extends Component {
                           type={type}
                         />
                         {error}
+                        
                       </div>
+                      
                     );
                   }}
                 </Field>
@@ -251,6 +296,72 @@ class ProfileSettingsFormComponent extends Component {
                 <div className={css.fileInfo}>
                   <FormattedMessage id="ProfileSettingsForm.fileInfo" />
                 </div>
+              </div>
+              
+              <div className={css.sectionContainer}>
+                <h3 className={css.sectionTitle}>
+                  <FormattedMessage id="ProfileSettingsForm.yourCreatorPicture" />
+                </h3>
+                <Field
+                  accept={ACCEPT_IMAGES}
+                  id="creatorImage"
+                  name="creatorImage"
+                  label={chooseCreatorLabel}
+                  type="file"
+                  form={null}
+                  uploadImageError={uploadImageError}
+                  disabled={uploadInProgress}
+                >
+                  {fieldProps => {
+                    const { accept, id, input, label, disabled, uploadImageError } = fieldProps;
+                    const { name, type } = input;
+                    const onChange = e => {
+                      const file = e.target.files[0];
+                      form.change(`creatorImage`, file);
+                      form.blur(`creatorImage`);
+                      if (file != null) {
+                        const tempId = `${file.name}_${Date.now()}`;
+                        onImageUpload({ id: tempId, file });
+                      }
+                    };
+
+                    let error = null;
+
+                    if (isUploadImageOverLimitError(uploadImageError)) {
+                      error = (
+                        <div className={css.error}>
+                          <FormattedMessage id="ProfileSettingsForm.imageUploadFailedFileTooLarge" />
+                        </div>
+                      );
+                    } else if (uploadImageError) {
+                      error = (
+                        <div className={css.error}>
+                          <FormattedMessage id="ProfileSettingsForm.imageUploadFailed" />
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className={css.uploadAvatarWrapper}>
+                        <label className={css.label} htmlFor={id}>
+                          {label}
+                        </label>
+                        <input
+                          accept={accept}
+                          id={id}
+                          name={name}
+                          className={css.uploadAvatarInput}
+                          disabled={disabled}
+                          onChange={onChange}
+                          type={type}
+                        />
+                        {error}
+                        
+                      </div>
+                      
+                    );
+                  }}
+                </Field>
               </div>
               <div className={css.sectionContainer}>
                 <h3 className={css.sectionTitle}>

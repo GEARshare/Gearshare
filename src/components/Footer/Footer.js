@@ -82,9 +82,40 @@ const Footer = props => {
             <div className={css.infoLinks}>
               <ul className={css.list}>
                 <li className={css.listItem}>
+                    <h3><FormattedMessage id="Footer.header" /></h3>
+                </li>
+                <li className={css.listItem}>
                   <NamedLink name="NewListingPage" className={css.link}>
                     <FormattedMessage id="Footer.toNewListingPage" />
                   </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.youtube" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.facebook" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.instagram" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" className={css.link}>
+                    <FormattedMessage id="Footer.ourblog" />
+                  </NamedLink>
+                </li>
+                
+              </ul>
+            </div>
+            <div className={css.infoLinks}>
+              <ul className={css.list}>
+                <li className={css.listItem}>
+                    <h3><FormattedMessage id="Footer.headerContact" /></h3>
                 </li>
                 <li className={css.listItem}>
                   <NamedLink name="AboutPage" className={css.link}>
@@ -107,7 +138,29 @@ const Footer = props => {
                   </NamedLink>
                 </li>
               </ul>
-            </div>          
+            </div>        
+            <div className={css.infoLinks}>
+              <ul className={css.list}>
+                <li className={css.listItem}>
+                    <h3><FormattedMessage id="Footer.term" /></h3>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="LandingPage" className={css.link}>
+                    <FormattedMessage id="Footer.termsOfUse" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" to={{ hash: '#contact' }} className={css.link}>
+                    <FormattedMessage id="Footer.community" />
+                  </NamedLink>
+                </li>
+                <li className={css.listItem}>
+                  <NamedLink name="AboutPage" to={{ hash: '#contact' }} className={css.link}>
+                    <FormattedMessage id="Footer.toContactPage" />
+                  </NamedLink>
+                </li>
+              </ul>
+            </div>             
             <div className={css.extraLinks}>
               <div className={css.someLinks}>{socialMediaLinks}</div>
               <div className={css.legalMatters}>

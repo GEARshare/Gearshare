@@ -70,13 +70,16 @@ export class ProfileSettingsPageComponent extends Component {
     const { firstName, lastName, bio } = user.attributes.profile;
     const profileImageId = user.profileImage ? user.profileImage.id : null;
     const profileImage = image || { imageId: profileImageId };
+    const creatorImageId = user.creatorImage ? user.creatorImage.id : null;
+    const creatorImage = image || { imageId: creatorImageId };
 
     const profileSettingsForm = user.id ? (
       <ProfileSettingsForm
         className={css.form}
         currentUser={currentUser}
-        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+        initialValues={{ firstName, lastName, bio, profileImage: user.profileImage,creatorImage:user.creatorImage }}
         profileImage={profileImage}
+        creatorImage={creatorImage}
         onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
         uploadInProgress={uploadInProgress}
         updateInProgress={updateInProgress}
@@ -104,12 +107,13 @@ export class ProfileSettingsPageComponent extends Component {
                 {user.id ? (
                   <NamedLink
                     className={css.profileLink}
-                    name="ProfilePage"
+                    name="CreatorPage"
                     params={{ id: user.id.uuid }}
                   >
-                    <FormattedMessage id="ProfileSettingsPage.viewProfileLink" />
+                    <FormattedMessage id="ProfileSettingsPage.viewCreatorLink" />
                   </NamedLink>
                 ) : null}
+                
               </div>
               {profileSettingsForm}
             </div>

@@ -31,6 +31,21 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
   switch (type) {
+    // case UPLOAD_CREATOR_IMAGE_REQUEST:
+    //   // payload.params: { id: 'tempId', file }
+    //   return {
+    //     ...state,
+    //     image: { ...payload.params },
+    //     uploadInProgress: true,
+    //     uploadImageError: null,
+    //   };
+    //   case UPLOAD_CREATOR_IMAGE_SUCCESS: {
+    //     // payload: { id: 'tempId', uploadedImage }
+    //     const { id, uploadedImage } = payload;
+    //     const { file } = state.image || {};
+    //     const image = { id, imageId: uploadedImage.id, file, uploadedImage };
+    //     return { ...state, image, uploadInProgress: false };
+    //   }
     case UPLOAD_IMAGE_REQUEST:
       // payload.params: { id: 'tempId', file }
       return {
