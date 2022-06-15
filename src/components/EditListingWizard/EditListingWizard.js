@@ -38,11 +38,10 @@ const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
 // and listing publishing happens after last panel.
 export const TABS = [
   DESCRIPTION,
-  FEATURES,
-  POLICY,
+  // FEATURES,
+  // POLICY,
   LOCATION,
   PRICING,
-  ...availabilityMaybe,
   PHOTOS,
 ];
 
@@ -95,10 +94,10 @@ const tabCompleted = (tab, listing) => {
   switch (tab) {
     case DESCRIPTION:
       return !!(description && title);
-    case FEATURES:
-      return !!(publicData && publicData.amenities);
-    case POLICY:
-      return !!(publicData && typeof publicData.rules !== 'undefined');
+    // case FEATURES:
+    //   return !!(publicData && publicData.amenities);
+    // case POLICY:
+    //   return !!(publicData && typeof publicData.rules !== 'undefined');
     case LOCATION:
       return !!(geolocation && publicData && publicData.location && publicData.location.address);
     case PRICING:
@@ -124,8 +123,8 @@ const tabCompleted = (tab, listing) => {
 const tabsActive = (isNew, listing) => {
   return TABS.reduce((acc, tab) => {
     const previousTabIndex = TABS.findIndex(t => t === tab) - 1;
-    const isActive =
-      previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
+    const isActive =true;
+      // previousTabIndex >= 0 ? !isNew || tabCompleted(TABS[previousTabIndex], listing) : true;
     return { ...acc, [tab]: isActive };
   }, {});
 };

@@ -22,6 +22,8 @@ import { TopbarContainer } from '../../containers';
 import facebookImage from '../../assets/saunatimeFacebook-1200x630.jpg';
 import twitterImage from '../../assets/saunatimeTwitter-600x314.jpg';
 import css from './LandingPage.module.css';
+import SectionSellGear from '../../components/SectionSellGear/SectionSellGear';
+import SectionSellBrowse from '../../components/SectionSellBrowse/SectionSellBrowse';
 
 export const LandingPageComponent = props => {
   const { history, intl, location, scrollingDisabled } = props;
@@ -68,10 +70,19 @@ export const LandingPageComponent = props => {
               </div>
             </li>
 
-
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionSellBrowse />
+              </div>
+            </li>
             <li className={css.section}>
               <div className={css.sectionContent}>
                 <SectionHowItWorks />
+              </div>
+            </li>
+            <li className={css.section}>
+              <div className={css.sectionContent}>
+                <SectionSellGear />
               </div>
             </li>
           </ul>

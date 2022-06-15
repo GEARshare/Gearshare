@@ -5,9 +5,9 @@ import classNames from 'classnames';
 
 import { NamedLink } from '../../components';
 
-import css from './SectionHowItWorks.module.css';
-import background from './images/howitworkImage.jpg'
-const SectionHowItWorks = props => {
+import css from './SectionSellBrowse.module.css';
+import background from './images/IMG_1304.jpeg'
+const SectionSellBrowse = props => {
   const { rootClassName, className } = props;
 
   const classes = classNames(rootClassName || css.root, className);
@@ -17,15 +17,13 @@ const SectionHowItWorks = props => {
         <img className={css.picture} src={background}/>
         <div className={css.header}>
           <div className={css.title}>
-            <FormattedMessage id="SectionHowItWorks.titleLineOne" />
-            <br />
-            <FormattedMessage id="SectionHowItWorks.titleLineTwo" />
+            <FormattedMessage id="SectionSellBrowse.content" />
           </div>
                   <NamedLink
-          name="SignupPage"
+          name="AboutPage"
           className={css.button}
         >
-          <FormattedMessage id="SectionHowItWorks.createListingLink" />
+          <FormattedMessage id="SectionSellBrowse.button" />
         </NamedLink>
         </div>
 
@@ -36,13 +34,13 @@ const SectionHowItWorks = props => {
   );
 };
 
-SectionHowItWorks.defaultProps = { rootClassName: null, className: null };
+SectionSellBrowse.defaultProps = { rootClassName: null, className: null };
 
 const { string } = PropTypes;
 
-SectionHowItWorks.propTypes = {
+SectionSellBrowse.propTypes = {
   rootClassName: string,
   className: string,
 };
 
-export default SectionHowItWorks;
+export default SectionSellBrowse;
