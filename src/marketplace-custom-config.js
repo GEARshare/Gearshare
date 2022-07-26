@@ -103,6 +103,34 @@ export const filters = [
     },
   },
   // {
+  //   id: 'sellprice',
+  //   label: 'Selling Price',
+  //   type: 'PriceFilter',
+  //   group: 'primary',
+  //   // Note: PriceFilter is fixed filter,
+  //   // you can't change "queryParamNames: ['price'],"
+  //   queryParamNames: ['price'],
+  //   // Price filter configuration
+  //   // Note: unlike most prices this is not handled in subunits
+  //   config: {
+  //     min: 0,
+  //     max: 1000,
+  //   },
+  // },
+  {
+    id: 'capacity',
+    label: 'Buying price',
+    type: 'PriceFilter',
+    group: 'primary',
+    queryParamNames: ['pub_capacity'],
+    config: {
+      min: 0,
+      max: 1000,
+      step: 5,
+      
+    },
+  },
+  // {
   //   id: 'amenities',
   //   label: 'Amenities',
   //   type: 'SelectMultipleFilter',

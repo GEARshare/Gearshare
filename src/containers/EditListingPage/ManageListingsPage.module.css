@@ -64,9 +64,9 @@
   padding: 0 24px 96px 24px;
 
   @media (--viewportMedium) {
-    /* display: flex;
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap; */
+    flex-wrap: wrap;
   }
 
   @media (--viewportLarge) {
@@ -140,12 +140,4 @@
   @media (--viewportLarge) {
     margin: auto 36px 0 36px;
   }
-}
-.styled-table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }

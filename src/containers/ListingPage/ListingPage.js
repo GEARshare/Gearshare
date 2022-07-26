@@ -51,6 +51,7 @@ import SectionReviews from './SectionReviews';
 import SectionHostMaybe from './SectionHostMaybe';
 import SectionRulesMaybe from './SectionRulesMaybe';
 import SectionMapMaybe from './SectionMapMaybe';
+import SectionCapacity from './SectionCapacity';
 import css from './ListingPage.module.css';
 
 const MIN_LENGTH_FOR_LONG_WORDS_IN_TITLE = 16;
@@ -69,7 +70,18 @@ const priceData = (price, intl) => {
   }
   return {};
 };
-
+const sellpriceData = (sellprice, intl) => {
+  if (sellprice && sellprice.currency === config.currency) {
+    const formattedSellPrice = formatMoney(intl, sellprice);
+    return { formattedPrice, sellpriceTitle: formattedSellPrice };
+  } else if (sellprice) {
+    return {
+      formattedSellPrice: `(${sellprice.currency})`,
+      sellpriceTitle: `Unsupported currency (${sellprice.currency})`,
+    };
+  }
+  return {};
+};
 const categoryLabel = (categories, key) => {
   const cat = categories.find(c => c.key === key);
   return cat ? cat.label : key;
@@ -197,7 +209,10 @@ export class ListingPageComponent extends Component {
       fetchLineItemsInProgress,
       fetchLineItemsError,
     } = this.props;
-
+    const capacityOptions = findOptionsForSelectFilter(
+      'capacity',
+      filterConfig
+    );
     const listingId = new UUID(rawParams.id);
     const isPendingApprovalVariant = rawParams.variant === LISTING_PAGE_PENDING_APPROVAL_VARIANT;
     const isDraftVariant = rawParams.variant === LISTING_PAGE_DRAFT_VARIANT;
@@ -238,6 +253,7 @@ export class ListingPageComponent extends Component {
       description = '',
       geolocation = null,
       price = null,
+      sellprice=null,
       title = '',
       publicData,
     } = currentListing.attributes;
@@ -253,6 +269,9 @@ export class ListingPageComponent extends Component {
 
     const bookingTitle = (
       <FormattedMessage id="ListingPage.bookingTitle" values={{ title: richTitle }} />
+    );
+    const sellingTitle= (
+      <FormattedMessage id="ListingPage.buyingTitle" values={{ title: richTitle }} />
     );
     const bookingSubTitle = intl.formatMessage({ id: 'ListingPage.bookingSubTitle' });
 
@@ -331,6 +350,7 @@ export class ListingPageComponent extends Component {
     const authorDisplayName = userDisplayNameAsString(ensuredAuthor, '');
 
     const { formattedPrice, priceTitle } = priceData(price, intl);
+    const { formattedSellPrice, sellpriceTitle } = sellpriceData(sellprice, intl);
 
     const handleBookingSubmit = values => {
       const isCurrentlyClosed = currentListing.attributes.state === LISTING_STATE_CLOSED;
@@ -385,7 +405,8 @@ export class ListingPageComponent extends Component {
           <span className={css.separator}>•</span>
         </span>
       ) : null;
-
+    const rent=true;
+    const sell=false;
     return (
       <Page
         title={schemaTitle}
@@ -428,6 +449,8 @@ export class ListingPageComponent extends Component {
                   <SectionHeading
                     priceTitle={priceTitle}
                     formattedPrice={formattedPrice}
+                    sellpriceTitle={sellpriceTitle}
+                    formattedSellPrice={formattedSellPrice}
                     richTitle={richTitle}
                     category={category}
                     hostLink={hostLink}
@@ -437,6 +460,8 @@ export class ListingPageComponent extends Component {
                   <SectionDescriptionMaybe description={description} />
                   <SectionFeaturesMaybe options={amenityOptions} publicData={publicData} />
                   <SectionRulesMaybe publicData={publicData} />
+                  <SectionCapacity publicData={publicData} options={capacityOptions} />
+
                   <SectionMapMaybe
                     geolocation={geolocation}
                     publicData={publicData}
@@ -457,6 +482,7 @@ export class ListingPageComponent extends Component {
                     onManageDisableScrolling={onManageDisableScrolling}
                   />
                 </div>
+                <div>
                 <BookingPanel
                   className={css.bookingPanel}
                   listing={currentListing}
@@ -473,7 +499,27 @@ export class ListingPageComponent extends Component {
                   lineItems={lineItems}
                   fetchLineItemsInProgress={fetchLineItemsInProgress}
                   fetchLineItemsError={fetchLineItemsError}
+                  isRent={rent}
                 />
+                <BookingPanel
+                  className={css.bookingPanel}
+                  listing={currentListing}
+                  isOwnListing={isOwnListing}
+                  unitType={unitType}
+                  onSubmit={handleBookingSubmit}
+                  title={sellingTitle}
+                  subTitle={bookingSubTitle}
+                  authorDisplayName={authorDisplayName}
+                  onManageDisableScrolling={onManageDisableScrolling}
+                  timeSlots={timeSlots}
+                  fetchTimeSlotsError={fetchTimeSlotsError}
+                  onFetchTransactionLineItems={onFetchTransactionLineItems}
+                  lineItems={lineItems}
+                  fetchLineItemsInProgress={fetchLineItemsInProgress}
+                  fetchLineItemsError={fetchLineItemsError}
+                  isRent={sell}
+                />
+                </div>
               </div>
             </div>
           </LayoutWrapperMain>

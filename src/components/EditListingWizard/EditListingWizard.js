@@ -26,8 +26,11 @@ import EditListingWizardTab, {
   LOCATION,
   PRICING,
   PHOTOS,
+  SELLPRICE,
+  CAPACITY,
 } from './EditListingWizardTab';
 import css from './EditListingWizard.module.css';
+import Button from '../Button/Button';
 
 // Show availability calendar only if environment variable availabilityEnabled is true
 const availabilityMaybe = config.enableAvailability ? [AVAILABILITY] : [];
@@ -40,13 +43,17 @@ export const TABS = [
   DESCRIPTION,
   // FEATURES,
   // POLICY,
+
   LOCATION,
+    CAPACITY,
   PRICING,
+
+  // SELLPRICE,
   PHOTOS,
 ];
 
 // Tabs are horizontal in small screens
-const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 1023;
+const MAX_HORIZONTAL_NAV_SCREEN_WIDTH = 10;
 
 const STRIPE_ONBOARDING_RETURN_URL_SUCCESS = 'success';
 const STRIPE_ONBOARDING_RETURN_URL_FAILURE = 'failure';
@@ -67,6 +74,10 @@ const tabLabel = (intl, tab) => {
     key = 'EditListingWizard.tabLabelAvailability';
   } else if (tab === PHOTOS) {
     key = 'EditListingWizard.tabLabelPhotos';
+  } else if (tab === SELLPRICE) {
+    key = 'EditListingWizard.tabLabelSellPrice';
+  }else if (tab === CAPACITY) {
+    key = 'EditListingWizard.tabLabelCapacity';
   }
 
   return intl.formatMessage({ id: key });
@@ -106,6 +117,8 @@ const tabCompleted = (tab, listing) => {
       return !!availabilityPlan;
     case PHOTOS:
       return images && images.length > 0;
+      case CAPACITY:
+        return !!(publicData && publicData.capacity);
     default:
       return false;
   }
@@ -192,11 +205,14 @@ class EditListingWizard extends Component {
     this.state = {
       draftId: null,
       showPayoutDetails: false,
+      showModal:false,
     };
     this.handleCreateFlowTabScrolling = this.handleCreateFlowTabScrolling.bind(this);
     this.handlePublishListing = this.handlePublishListing.bind(this);
     this.handlePayoutModalClose = this.handlePayoutModalClose.bind(this);
     this.handlePayoutSubmit = this.handlePayoutSubmit.bind(this);
+
+    this.handleModalClose=this.handleModalClose.bind(this);
   }
 
   componentDidMount() {
@@ -237,7 +253,14 @@ class EditListingWizard extends Component {
   handlePayoutModalClose() {
     this.setState({ showPayoutDetails: false });
   }
-
+  handleModalClose()
+  {
+    this.setState({ showModal: false });
+  }
+  handleModalOpen=()=>
+  {
+    this.setState({ showModal: true });
+  }
   handlePayoutSubmit(values) {
     this.props
       .onPayoutDetailsSubmit(values)
@@ -366,6 +389,16 @@ class EditListingWizard extends Component {
     }
 
     return (
+      <div>
+      <button className={css.button-3} onClick={this.handleModalOpen}>
+      Add a listing</button>
+      <Modal
+      id="EditListingWizard.modal"
+      isOpen={this.state.showModal}
+      onClose={this.handleModalClose}
+      onManageDisableScrolling={onManageDisableScrolling}
+      >
+      
       <div className={classes}>
         <Tabs
           rootClassName={css.tabsContainer}
@@ -461,6 +494,8 @@ class EditListingWizard extends Component {
           </div>
         </Modal>
       </div>
+      </Modal>
+    </div>
     );
   }
 }

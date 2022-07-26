@@ -87,6 +87,13 @@ const EditListingDescriptionFormComponent = props => (
           {errorMessageCreateListingDraft}
           {errorMessageUpdateListing}
           {errorMessageShowListing}
+          
+          <CustomCategorySelectFieldMaybe
+            id="category"
+            name="category"
+            categories={categories}
+            intl={intl}
+          />          
           <FieldTextInput
             id="title"
             name="title"
@@ -106,15 +113,10 @@ const EditListingDescriptionFormComponent = props => (
             type="textarea"
             label={descriptionMessage}
             placeholder={descriptionPlaceholderMessage}
-            validate={composeValidators(required(descriptionRequiredMessage))}
+            validate={composeValidators()}
           />
 
-          <CustomCategorySelectFieldMaybe
-            id="category"
-            name="category"
-            categories={categories}
-            intl={intl}
-          />
+
 
           <Button
             className={css.submitButton}

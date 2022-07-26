@@ -19,11 +19,15 @@ const SectionSellBrowse = props => {
           <div className={css.title}>
             <FormattedMessage id="SectionSellBrowse.content" />
           </div>
-                  <NamedLink
-          name="AboutPage"
+          <NamedLink
+          name="SearchPage"
+          to={{
+            search:
+              '',
+          }}
           className={css.button}
         >
-          <FormattedMessage id="SectionSellBrowse.button" />
+          <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         </div>
 

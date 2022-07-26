@@ -20,6 +20,7 @@ import { TopbarContainer } from '../../containers';
 
 import { closeListing, openListing, getOwnListingsById } from './ManageListingsPage.duck';
 import css from './ManageListingsPage.module.css';
+import EditListingPage from '../EditListingPage/EditListingPage';
 
 export class ManageListingsPageComponent extends Component {
   constructor(props) {
@@ -104,7 +105,7 @@ export class ManageListingsPageComponent extends Component {
     const panelWidth = 62.5;
     // Render hints for responsive image
     const renderSizes = [
-      `(max-width: 767px) 100vw`,
+      `(max-width: 767px) 10vw`,
       `(max-width: 1920px) ${panelWidth / 2}vw`,
       `${panelWidth / 3}vw`,
     ].join(', ');
@@ -140,6 +141,7 @@ export class ManageListingsPageComponent extends Component {
               </div>
               {paginationLinks}
             </div>
+
           </LayoutWrapperMain>
           <LayoutWrapperFooter>
             <Footer />

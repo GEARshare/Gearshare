@@ -10,6 +10,8 @@ const SectionHeading = props => {
   const {
     priceTitle,
     formattedPrice,
+    sellpriceTitle,
+    formattedSellPrice,
     richTitle,
     category,
     hostLink,
@@ -35,6 +37,16 @@ const SectionHeading = props => {
         </div>
         <div className={css.desktopPerUnit}>
           <FormattedMessage id={unitTranslationKey} />
+        </div>
+      </div>
+      <div className={css.desktopPriceContainer}>
+        <div className={css.desktopPriceValue} title={priceTitle}>
+          or
+        </div>
+      </div>
+      <div className={css.desktopPriceContainer}>
+        <div className={css.desktopPriceValue} title={priceTitle}>
+          {formattedSellPrice}
         </div>
       </div>
       <div className={css.heading}>

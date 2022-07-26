@@ -75,7 +75,7 @@
 
 /* Firefox doesn't support image aspect ratio inside flexbox */
 .aspectWrapper {
-  padding-bottom: 66.6667%; /* 3:2 Aspect Ratio */
+  padding-bottom: 13.33334%; /* 3:2 Aspect Ratio original 66.66667*/
   background: var(--matterColorNegative); /* Loading BG color */
   margin-bottom: 1px; /* Fix 1px bug */
 }
@@ -83,7 +83,7 @@
 .rootForImage {
   /* Layout - image will take space defined by aspect ratio wrapper */
   composes: coverEverything;
-  width: 100%;
+  width: 20%;
   border-radius: 2px;
 }
 
@@ -189,8 +189,8 @@
 .info {
   /* Layout */
   display: flex;
-  flex-direction: column;
-  padding: 8px 0 2px 0;
+  flex-direction: row;
+  padding: 8px 0 0px 0;
 }
 
 .price {
@@ -201,11 +201,9 @@
   flex-shrink: 0;
 
   padding-top: 4px;
-  padding-bottom: 2px;
 
   @media (--viewportMedium) {
     padding-top: 5px;
-    padding-bottom: 3px;
   }
 }
 
@@ -266,7 +264,6 @@
   text-align: left;
 
   padding-top: 3px;
-  padding-bottom: 3px;
 
   /* Remove default margins from font */
   margin-top: 0;
@@ -274,7 +271,6 @@
 
   @media (--viewportMedium) {
     padding-top: 4px;
-    padding-bottom: 4px;
 
     margin-top: 0;
     margin-bottom: 0;
@@ -345,7 +341,7 @@
   @apply --marketplaceH5FontStyles;
   line-height: 18px;
   padding-top: 2px;
-  padding-bottom: 4px;
+  padding-bottom: 0px;
 
   /* Remove default margins from font */
   margin-top: 0;

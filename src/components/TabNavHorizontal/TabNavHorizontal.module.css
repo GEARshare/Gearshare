@@ -12,7 +12,7 @@
 
 .tab {
   margin-left: 16px;
-
+max-width: 50px;
   &:first-child {
     margin-left: 0;
   }

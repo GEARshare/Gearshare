@@ -69,6 +69,7 @@ const BookingPanel = props => {
     lineItems,
     fetchLineItemsInProgress,
     fetchLineItemsError,
+    isRent,
   } = props;
 
   const price = listing.attributes.price;
@@ -79,6 +80,8 @@ const BookingPanel = props => {
   const { formattedPrice, priceTitle } = priceData(price, intl);
   const isBook = !!parse(location.search).book;
 
+
+  
   const subTitleText = !!subTitle
     ? subTitle
     : showClosedListingHelpText
@@ -116,7 +119,7 @@ const BookingPanel = props => {
 
         <div className={css.bookingHeading}>
           <h2 className={titleClasses}>{title}</h2>
-          {subTitleText ? <div className={css.bookingHelp}>{subTitleText}</div> : null}
+          {subTitleText ? <div className={css.bookingHelp}>{isRent ? subTitleText:null}</div> : null}
         </div>
         {showBookingDatesForm ? (
           <BookingDatesForm
@@ -134,6 +137,7 @@ const BookingPanel = props => {
             lineItems={lineItems}
             fetchLineItemsInProgress={fetchLineItemsInProgress}
             fetchLineItemsError={fetchLineItemsError}
+            isRent={isRent}
           />
         ) : null}
       </ModalInMobile>

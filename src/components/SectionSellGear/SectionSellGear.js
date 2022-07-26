@@ -9,7 +9,6 @@ import css from './SectionSellGear.module.css';
 import background from './images/IMG_1302.jpeg'
 const SectionSellGear = props => {
   const { rootClassName, className } = props;
-
   const classes = classNames(rootClassName || css.root, className);
   return (
     <div className={classes}>    
@@ -19,11 +18,15 @@ const SectionSellGear = props => {
           <div className={css.title}>
             <FormattedMessage id="SectionSellGear.content" />
           </div>
-                  <NamedLink
-          name="AboutPage"
+        <NamedLink
+          name="SearchPage"
+          to={{
+            search:
+              '',
+          }}
           className={css.button}
         >
-          <FormattedMessage id="SectionHowItWorks.createListingLink" />
+          <FormattedMessage id="SectionHero.browseButton" />
         </NamedLink>
         </div>
 
